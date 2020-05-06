@@ -41,3 +41,22 @@ layout = dict(title = 'Citation and Teaching vs World Rank of Top 100 Universiti
              )
 fig = dict(data = data, layout = layout)
 iplot(fig)
+
+df2016 = timesData[timesData.year == 2016].iloc[:20,:]
+num_students_size = [float(each.replace(',','.')) for each in df2016.num_students]
+international_color = [float(each) for each in df2016.international]
+
+data = [
+    {
+        'x' : df2016.world_rank,
+        'y' : df2016.teaching,
+        'mode' : 'markers',
+        'marker' : {
+            'color' : international_color,
+            'size' : num_students_size,
+            'showscale' : True
+        },
+        'text' : df2016.university_name        
+    }
+]
+iplot(data)
